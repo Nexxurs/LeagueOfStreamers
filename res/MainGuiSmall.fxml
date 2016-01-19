@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainGuiController">
+   <top>
+      <ToolBar nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER_LEFT">
+        <items>
+          <Button fx:id="SyncBTN" mnemonicParsing="false" onAction="#onClickSyncBTN" prefHeight="27.0" prefWidth="80.0" text="Sync Now" />
+            <Button mnemonicParsing="false" onAction="#onTemplates" text="Templates" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <ProgressIndicator id="ProgressInd" fx:id="ProgInd" maxWidth="-Infinity" prefHeight="28.0" prefWidth="28.0" visible="false" />
+            <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#onHelpButton" prefHeight="27.0" prefWidth="27.0" text="Button">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0">
+                     <image>
+                        <Image url="@ico/warning39.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+        </items>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ToolBar>
+   </top>
+   <bottom>
+      <Pane maxHeight="20.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label id="statusLB" fx:id="StatusLB" text="Status" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Pane>
+   </bottom>
+   <center>
+      <VBox alignment="TOP_RIGHT" prefHeight="340.0" prefWidth="341.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="SumList" onKeyPressed="#onKeyPressedInSumList" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <HBox alignment="TOP_RIGHT" fillHeight="false" prefHeight="29.0" prefWidth="208.0">
+               <children>
+                  <TextField fx:id="addSumTF" onAction="#onEnter" onKeyTyped="#onSumTFChanged" prefHeight="27.0" prefWidth="187.0" promptText="Summoner Name" HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="regionCB" prefHeight="27.0" prefWidth="66.0" HBox.hgrow="SOMETIMES" />
+                  <Button fx:id="AddBTN" mnemonicParsing="false" onAction="#AddBtn" prefHeight="27.0" prefWidth="46.0" text="Add" textAlignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
