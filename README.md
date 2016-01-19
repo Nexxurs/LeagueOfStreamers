@@ -10,7 +10,7 @@ I've just finished the first runnable version, so please tell me if you like it,
 
 ### Get the Program ###
 
-Just download the pre-compiled version or download the sourcecode and compile it yourself. If you want to do it yourself, you need your own Riot API Key, which will be put in a new constant.java file into the src/main folder. (Thats need to be that way, because I cant make the key public)
+Just download the pre-compiled version or download the sourcecode and compile it yourself. If you want to do it yourself, you need your own Riot API Key, which will be put in a new constant.java file into the src/main folder. (That needs to be that way, because I cant make the key public)
 
 ### How to use it ###
 
