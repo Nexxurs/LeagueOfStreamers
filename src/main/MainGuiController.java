@@ -117,11 +117,12 @@ public class MainGuiController implements BackgroundListener{
 			Pane rootPane = loader.load();
 			Scene scene = new Scene(rootPane);
 			scene.setFill(Color.TRANSPARENT);
+			stage.setScene(scene);
+			stage.setTitle("League of Streamers - Templates");
+			stage.show();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		//TODO hier weiter
-		
 	}
 	// --- Help Methods ---
 	private void addSum(){

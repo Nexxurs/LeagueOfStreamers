@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.constant;
 import summoner.Summoner;
+import template.TemplateObject;
 
 public class storageObject implements Serializable {
 	/**
@@ -25,6 +26,7 @@ public class storageObject implements Serializable {
 	private String storageDirectory;
 	private boolean syncThreadStartsWithProgram;
 	private Region lastRegion;
+	private transient ObservableList<TemplateObject> tempList;
 	
 	public storageObject() {
 		summonerList = FXCollections.observableArrayList();
@@ -32,12 +34,12 @@ public class storageObject implements Serializable {
 		storageDirectory = DefaultDirectory+File.separator+constant.getProgName();
 		syncThreadStartsWithProgram = true;
 		lastRegion = Region.NA;
+		tempList = FXCollections.observableArrayList();
+		tempList.add(TemplateObject.LevelTemplate());
+		tempList.add(TemplateObject.DivisionTemplate());
+
 	}
-	
-	public boolean storageDirectoryExists(){
-		return Files.exists(Paths.get(URI.create(storageDirectory)));
-	}
-	
+
 	public boolean isSumAlreadyInList(String sumName, Region region){
 		for(Summoner sum : summonerList){
 			if(sum.getName().toLowerCase().equals(sumName.toLowerCase()) && sum.getRegion().equals(region)) return true;
@@ -70,13 +72,19 @@ public class storageObject implements Serializable {
 	public void setLastRegion(Region lastRegion) {
 		this.lastRegion = lastRegion;
 	}
-	
+
+	public ObservableList<TemplateObject> getTempList() {
+		return tempList;
+	}
+
 	//--- Serilization ---
 	private void writeObject(java.io.ObjectOutputStream out)
 		     throws IOException {
 		out.defaultWriteObject();
 		ArrayList<Summoner> sumArrayList = new ArrayList<Summoner>(summonerList);
 		out.writeObject(sumArrayList);
+		ArrayList<TemplateObject> tempArrayList = new ArrayList<>(tempList);
+		out.writeObject(tempArrayList);
 	}
 	private void readObject(java.io.ObjectInputStream in)
 		     throws IOException, ClassNotFoundException {
@@ -84,5 +92,7 @@ public class storageObject implements Serializable {
 		
 		List<Summoner> sumArrayList = (List<Summoner>) in.readObject();
 		this.summonerList = FXCollections.observableArrayList(sumArrayList);
+		List<TemplateObject> tempArrayList = (List<TemplateObject>) in.readObject();
+		this.tempList = FXCollections.observableArrayList(tempArrayList);
 	}
 }

@@ -1,6 +1,7 @@
 package main;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import storage.dataStorage;
 
 import java.util.ResourceBundle;
@@ -33,6 +35,7 @@ public class MainApplication extends Application {
 		primaryStage.setOnCloseRequest(we -> {
 			dataStorage.getStorageObj().setLastRegion(guiCont.getCurrRegion());
 			dataStorage.safeStorageObjToFile();
+			System.exit(0);
 		});
 		primaryStage.setTitle("League of Streamers");
 		primaryStage.setMinHeight(350);

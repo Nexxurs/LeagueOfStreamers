@@ -11,6 +11,7 @@ import main.constant;
 import storage.dataStorage;
 import summoner.BackgroundListener;
 import summoner.Summoner;
+import template.TemplateObject;
 
 public class SyncThread implements Runnable {
 	RiotAPI api;
@@ -30,16 +31,13 @@ public class SyncThread implements Runnable {
 			}
 			sum.verify();
 			String mainDirectory = dataStorage.getMainDocumentDirectory();
-			try (PrintStream out = new PrintStream(new FileOutputStream(mainDirectory+File.separator+sum.getName()+"-Level.txt"))) {
-			    out.print(sum.getLevel());
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} 
-			try(PrintStream out = new PrintStream(new FileOutputStream(mainDirectory+File.separator+sum.getName()+"-Division.txt"))){
-				out.print(sum.getDivision()+" - "+sum.getLP()+" LP");
-			}
-			catch (FileNotFoundException e) {
-				e.printStackTrace();
+
+			for(TemplateObject tempObj : dataStorage.getStorageObj().getTempList()){
+				try (PrintStream out = new PrintStream(new FileOutputStream(mainDirectory+File.separator+sum.getName()+"-"+tempObj.getName()+".txt"))) {
+					out.print(tempObj.getOutputText(sum));
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 		if(Thread.currentThread().isInterrupted()){
